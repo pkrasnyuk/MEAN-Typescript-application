@@ -1,0 +1,72 @@
+<div class="col-md-6 col-md-offset-3">
+    <p class="col-md-offset-12">
+        <a [routerLink]="['/login']">Logout</a>
+    </p>
+    <h1>
+        Hi {{currentUser.username}}
+    </h1>
+</div>
+
+<div class="col-md-16 col-md-offset-1">
+
+    <!--<input type="button" value="Add" class="btn btn-default" (click)="addUser()" />-->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td>Id</td>
+                <td>UserName</td>
+                <td>Email</td>
+                <td>Type</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">
+                <ng-template [ngTemplateOutlet]="loadTemplate(user)"
+                             [ngOutletContext]="{ $implicit: user}">
+                </ng-template>
+            </tr>
+        </tbody>
+    </table>
+
+    <ng-template #readOnlyTemplate let-user>
+        <td>{{user.id}}</td>
+        <td>{{user.username}}</td>
+        <td>{{user.email}}</td>
+        <td>
+            <select readonly disabled class="form-control" [(ngModel)]="user.type">
+                <option *ngFor="let item of userTypeList" [value]="item.value" [label]="item.name"></option>
+            </select>
+        </td>
+        <td>
+            <input type="button" value="Edit" class="btn btn-default" (click)="editUser(user)" />
+        </td>
+        <td>
+            <input type="button" value="Delete" (click)="deleteUser(user)" class="btn btn-danger" />
+        </td>
+    </ng-template>
+
+    <ng-template #editTemplate>
+        <td>
+            <input type="text" [(ngModel)]="editedUser.id" readonly disabled class="form-control" />
+        </td>
+        <td>
+            <input type="text" [(ngModel)]="editedUser.username" class="form-control" />
+        </td>
+        <td>
+            <input type="text" [(ngModel)]="editedUser.email" class="form-control" />
+        </td>
+        <td>
+            <select [(ngModel)]="editedUser.type" class="form-control">
+                <option *ngFor="let item of userTypeList" [value]="item.value" [label]="item.name"></option>
+            </select>
+        </td>
+        <td>
+            <input type="button" value="Save" (click)="saveUser()" class="btn btn-success" />
+        </td>
+        <td>
+            <input type="button" value="Cancel" (click)="cancel()" class="btn btn-warning" />
+        </td>
+    </ng-template>
+</div>

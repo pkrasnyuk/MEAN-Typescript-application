@@ -1,0 +1,17 @@
+﻿{
+  "common": {
+    "domain": "localhost",
+    "port": 1200
+  },
+  "db": {
+    "connectionString": "mongodb://mongo:27017/webapp"
+  },
+  "security": {
+    "privateKey": "39LvDSm45vjYOh90",
+    "tokenExpiry": 3600
+  },
+  "email": {
+    "username": "sendermailid",
+    "password": "senderpassword"
+  }
+}
